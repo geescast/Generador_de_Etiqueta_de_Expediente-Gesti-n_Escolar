@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Etiqueta - Gestión Escolar</title>
-    <!-- Tailwind CSS para diseño adaptable a móviles y PC -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Librería para el Código de Barras -->
+    <!-- JsBarcode -->
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
     
     <style>
-        /* Ajustes específicos para impresión y diseño de la etiqueta */
         body { font-family: Arial, sans-serif; }
         
         .label-page { 
@@ -23,7 +22,7 @@
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); 
         }
         
-        /* SECCIÓN 1: Pestaña del folder - 16cm x 2cm EXACTOS */
+        /* SECCIÓN 1: Pestaña 16cm x 2cm EXACTOS */
         .section-1 { 
             width: 16cm; 
             height: 2cm; 
@@ -76,7 +75,6 @@
             flex-direction: column; z-index: 50; 
         }
 
-        /* CORRECCIÓN PARA EVITAR RECORTES EN IMPRESIÓN */
         @media print {
             @page { size: letter; margin: 1.5cm; }
             body { background: white; }
@@ -90,34 +88,34 @@
 </head>
 <body class="bg-gray-200 flex flex-col md:flex-row min-h-screen">
 
-    <!-- PANEL IZQUIERDO (Móvil y PC) -->
+    <!-- PANEL IZQUIERDO -->
     <div class="no-print w-full md:w-96 bg-[#111827] text-white p-6 flex flex-col shadow-xl overflow-y-auto z-10 shrink-0 md:h-screen">
         <h2 class="text-xl font-bold mb-1 text-white">Captura de Datos</h2>
         <p class="text-xs text-gray-400 mb-6">Etiqueta de Expediente - ESCA</p>
 
-        <button onclick="fillExample()" class="bg-gray-700 hover:bg-gray-600 text-white text-sm py-2 px-4 rounded mb-6 transition">
+        <button id="btn-example" class="bg-gray-700 hover:bg-gray-600 text-white text-sm py-2 px-4 rounded mb-6 transition">
             ✓ Cargar Ejemplo Oficial
         </button>
 
         <div class="flex flex-col gap-4">
             <div>
                 <label class="text-xs font-bold text-gray-300 mb-1 block">NOMBRE COMPLETO (APELLIDOS) *</label>
-                <input type="text" id="in-nombre" placeholder="EJ. LOPEZ MENDOZA ALEJANDRO DANIEL" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="in-nombre" placeholder="EJ. LOPEZ MENDOZA ALEJANDRO DANIEL" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none">
             </div>
             
             <div>
                 <label class="text-xs font-bold text-gray-300 mb-1 block">BOLETA O PREBOLETA (10 DÍGITOS) *</label>
-                <input type="text" id="in-boleta" placeholder="EJ. 2027407185" maxlength="10" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="in-boleta" placeholder="EJ. 2027407185" maxlength="10" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none">
             </div>
             
             <div>
                 <label class="text-xs font-bold text-gray-300 mb-1 block">CURP (18 CARACTERES) *</label>
-                <input type="text" id="in-curp" placeholder="EJ. LOMA080514HDFMNR04" maxlength="18" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="in-curp" placeholder="EJ. LOMA080514HDFMNR04" maxlength="18" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none">
             </div>
             
             <div>
                 <label class="text-xs font-bold text-gray-300 mb-1 block">PROGRAMA ACADÉMICO *</label>
-                <select id="in-programa" class="w-full p-2 text-black rounded text-sm border-2 border-transparent focus:border-blue-500 outline-none" onchange="updatePreview()">
+                <select id="in-programa" class="w-full p-2 text-black rounded text-sm border-2 border-transparent focus:border-blue-500 outline-none">
                     <option value="">-- SELECCIONA TU PROGRAMA --</option>
                     <option value="CONTADOR PÚBLICO">CONTADOR PÚBLICO</option>
                     <option value="ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL">ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL</option>
@@ -131,7 +129,7 @@
             
             <div>
                 <label class="text-xs font-bold text-gray-300 mb-1 block">GRUPO ASIGNADO *</label>
-                <input type="text" id="in-grupo" placeholder="EJ. 1CM4" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none" oninput="updatePreview()">
+                <input type="text" id="in-grupo" placeholder="EJ. 1CM4" class="w-full p-2 text-black rounded uppercase text-sm border-2 border-transparent focus:border-blue-500 outline-none">
             </div>
         </div>
 
@@ -139,18 +137,17 @@
             <p id="status-msg" class="text-xs text-red-400 font-bold mb-2 text-center bg-red-900/30 p-2 rounded border border-red-500/50">
                 Llena los 5 campos para habilitar descarga.
             </p>
-            <button id="btn-print" onclick="window.print()" disabled class="w-full bg-[#682444] hover:bg-[#853057] disabled:bg-gray-600 text-white font-bold py-3 px-4 rounded transition cursor-not-allowed">
+            <button id="btn-print" disabled class="w-full bg-[#682444] hover:bg-[#853057] disabled:bg-gray-600 text-white font-bold py-3 px-4 rounded transition cursor-not-allowed">
                 🖨️ Imprimir / Guardar PDF
             </button>
         </div>
     </div>
 
-    <!-- PANEL DERECHO (Vista previa) -->
+    <!-- PANEL DERECHO -->
     <div class="flex-1 p-4 md:p-8 overflow-y-auto flex justify-center items-start">
         
         <div class="label-page" id="printable-area">
             
-            <!-- Bloqueo de vista previa -->
             <div id="watermark" class="watermark rounded-lg">
                 <div class="bg-white p-8 rounded-xl shadow-2xl text-center border-2 border-red-100 max-w-sm">
                     <div class="text-red-500 text-4xl mb-3">🔒</div>
@@ -159,13 +156,11 @@
                 </div>
             </div>
 
-            <!-- ENCABEZADO FORMATO OFICIAL -->
             <div class="flex items-center justify-center mb-8 border-b-2 border-dashed border-gray-400 pb-4">
                 <div class="bg-[#682444] text-white font-bold px-4 py-2 text-sm mr-4">GESTIÓN ESCOLAR</div>
                 <h1 class="text-[#682444] font-bold text-xl uppercase">Etiqueta Expediente para Gestión Escolar</h1>
             </div>
             
-            <!-- INDICADOR DE MEDIDA (Oculto al imprimir) -->
             <div class="no-print text-center text-xs text-blue-600 font-bold mb-1">
                 Medida oficial pestaña de folder: 16 cm largo × 2 cm alto (Escala 1:1 al imprimir)
             </div>
@@ -196,9 +191,100 @@
         </div>
     </div>
 
-    <!-- LÓGICA DE VALIDACIÓN -->
+    <!-- CEREBRO DE LA PÁGINA (SCRIPT) -->
     <script>
-        function fillExample() {
-            document.getElementById('in-nombre').value = 'LOPEZ MENDOZA ALEJANDRO DANIEL';
-            document.getElementById('in-boleta').value = '2027407185';
-            document.getElementById('in-curp').value = 'LOMA
+        document.addEventListener("DOMContentLoaded", function() {
+            
+            const btnExample = document.getElementById('btn-example');
+            const btnPrint = document.getElementById('btn-print');
+            const inputs = ['in-nombre', 'in-boleta', 'in-curp', 'in-grupo'];
+            const select = document.getElementById('in-programa');
+
+            // Cargar ejemplo oficial
+            btnExample.addEventListener('click', function() {
+                document.getElementById('in-nombre').value = 'LOPEZ MENDOZA ALEJANDRO DANIEL';
+                document.getElementById('in-boleta').value = '2027407185';
+                document.getElementById('in-curp').value = 'LOMA080514HDFMNR04';
+                document.getElementById('in-programa').value = 'ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL';
+                document.getElementById('in-grupo').value = '1CM4';
+                updatePreview();
+            });
+
+            // Escuchar cambios en los inputs
+            inputs.forEach(id => {
+                document.getElementById(id).addEventListener('input', updatePreview);
+            });
+            select.addEventListener('change', updatePreview);
+
+            // Imprimir
+            btnPrint.addEventListener('click', function() {
+                window.print();
+            });
+
+            function updatePreview() {
+                const nombre = document.getElementById('in-nombre').value.toUpperCase();
+                const boleta = document.getElementById('in-boleta').value.toUpperCase();
+                const curp = document.getElementById('in-curp').value.toUpperCase();
+                const programa = document.getElementById('in-programa').value;
+                const grupo = document.getElementById('in-grupo').value.toUpperCase();
+
+                document.getElementById('out-nombre1').innerText = nombre;
+                
+                document.getElementById('out-boleta1').innerText = boleta ? `*${boleta}*` : '*BOLETA O PREBOLETA*';
+                document.getElementById('out-boleta1').style.color = boleta ? 'black' : '#6b7280';
+                
+                document.getElementById('out-curp').innerText = curp ? curp : 'CURP (18 CARACTERES)';
+                document.getElementById('out-curp').style.color = curp ? 'black' : '#6b7280';
+                
+                document.getElementById('out-programa').innerText = programa ? programa : 'PROGRAMA ACADÉMICO';
+                document.getElementById('out-programa').style.color = programa ? 'black' : '#6b7280';
+                
+                document.getElementById('out-grupo').innerText = grupo ? grupo : 'GRUPO';
+                document.getElementById('out-grupo').style.color = grupo ? 'black' : '#6b7280';
+
+                // Código de barras
+                if(boleta.length > 0) {
+                    try {
+                        JsBarcode("#barcode", boleta, { format: "CODE128", lineColor: "#000", width: 2, height: 40, displayValue: false });
+                    } catch(e) {}
+                } else {
+                    document.getElementById('barcode').innerHTML = '';
+                }
+
+                // Validación
+                const isValid = nombre.trim().length > 0 && boleta.length === 10 && curp.length === 18 && programa !== '' && grupo.trim().length > 0;
+                
+                const watermark = document.getElementById('watermark');
+                const statusMsg = document.getElementById('status-msg');
+
+                if (isValid) {
+                    btnPrint.disabled = false;
+                    btnPrint.classList.remove('cursor-not-allowed');
+                    watermark.style.display = 'none';
+                    statusMsg.innerText = '✓ Todos los datos listos. Ya puedes descargar.';
+                    statusMsg.className = 'text-xs text-green-400 font-bold mb-2 text-center bg-green-900/30 p-2 rounded border border-green-500/50';
+                } else {
+                    btnPrint.disabled = true;
+                    btnPrint.classList.add('cursor-not-allowed');
+                    watermark.style.display = 'flex';
+                    let alertMsg = 'Faltan datos o son incorrectos: ';
+                    if(boleta.length > 0 && boleta.length !== 10) alertMsg += '(Boleta requiere 10 dígitos) ';
+                    if(curp.length > 0 && curp.length !== 18) alertMsg += '(CURP requiere 18 caracteres)';
+                    statusMsg.innerText = alertMsg;
+                    statusMsg.className = 'text-xs text-red-400 font-bold mb-2 text-center bg-red-900/30 p-2 rounded border border-red-500/50';
+                }
+            }
+
+            // Bloquear Ctrl+P si no está completo
+            window.addEventListener("keydown", function (e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === "p") {
+                    if (btnPrint.disabled) {
+                        e.preventDefault();
+                        alert("ACCESO DENEGADO: Completa todos los campos obligatorios.");
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
