@@ -25,9 +25,9 @@
         /* DOBLE LÍNEA: Contenedor exterior punteado de corte */
         .cut-box {
             border: 2px dashed #888;
-            padding: 3px; /* Separación entre la línea punteada y la normal */
+            padding: 10px;
             position: relative;
-            background: white;
+            background: transparent;
             margin: 0 auto;
         }
 
@@ -36,13 +36,14 @@
             top: -9px;
             left: 20px;
             background: white;
-            padding: 0 5px;
+            padding: 0 6px;
             font-size: 8pt;
             color: #555;
             font-weight: bold;
+            line-height: 1;
         }
         
-        /* SECCIÓN 1: Pestaña 16cm x 1.2cm EXACTOS (Línea normal interior) */
+        /* SECCIÓN 1: Pestaña 16cm x 1.2cm EXACTOS */
         .section-1 { 
             width: 16cm; 
             height: 1.2cm; 
@@ -55,14 +56,16 @@
             text-transform: uppercase; 
             text-align: center; 
             box-sizing: border-box;
+            background: white;
         }
         
-        /* SECCIÓN 2: Datos (Línea normal interior) */
+        /* SECCIÓN 2: Datos */
         .section-2 { 
             width: 16cm; 
             border: 2px solid black; 
             padding: 6px; 
             box-sizing: border-box;
+            background: white;
         }
         
         .data-row { 
@@ -101,7 +104,7 @@
             .data-row { background-color: #e5e7eb !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .watermark { display: none !important; }
             .cut-box { border-color: #000; }
-            .cut-label { color: #000; }
+            .cut-label { color: #000; background: white !important; }
         }
     </style>
 </head>
@@ -180,7 +183,6 @@
                 <h1 class="text-[#682444] font-bold text-xl uppercase">Etiqueta Expediente para Gestión Escolar</h1>
             </div>
 
-            <!-- SECCIÓN 1 CON GUÍA DE CORTE -->
             <div class="flex items-center justify-center mb-10">
                 <div class="cut-box">
                     <div class="cut-label">✂️ CORTE</div>
@@ -189,12 +191,11 @@
                 <div class="no-print bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold ml-4 shadow shrink-0">1</div>
             </div>
             
-            <!-- SECCIÓN 2 CON GUÍA DE CORTE -->
             <div class="flex items-center justify-center mb-10">
                 <div class="cut-box">
                     <div class="cut-label">✂️ CORTE</div>
                     <div class="section-2">
-                        <div class="data-row text-gray-500 text-sm" id="out-boleta1">*BOLETA O PREBOLETA*</div>
+                        <div class="data-row text-gray-500 text-sm" id="out-boleta1">BOLETA O PREBOLETA</div>
                         <div class="data-row text-gray-500 text-sm" id="out-curp">CURP (18 CARACTERES)</div>
                         <div class="data-row text-gray-500 text-sm" id="out-programa">PROGRAMA ACADÉMICO</div>
                         <div class="data-row text-gray-500 text-sm" id="out-grupo">GRUPO</div>
@@ -253,7 +254,8 @@
 
                 document.getElementById('out-nombre1').innerText = nombre;
                 
-                document.getElementById('out-boleta1').innerText = boleta ? `*${boleta}*` : '*BOLETA O PREBOLETA*';
+                // Ya no mostramos los asteriscos en el texto visual
+                document.getElementById('out-boleta1').innerText = boleta ? boleta : 'BOLETA O PREBOLETA';
                 document.getElementById('out-boleta1').style.color = boleta ? 'black' : '#6b7280';
                 
                 document.getElementById('out-curp').innerText = curp ? curp : 'CURP (18 CARACTERES)';
@@ -265,10 +267,10 @@
                 document.getElementById('out-grupo').innerText = grupo ? grupo : 'GRUPO';
                 document.getElementById('out-grupo').style.color = grupo ? 'black' : '#6b7280';
 
-                // Código de barras
+                // Código de barras: SI recibe los asteriscos internamente
                 if(boleta.length > 0) {
                     try {
-                        JsBarcode("#barcode", boleta, { format: "CODE128", lineColor: "#000", width: 2, height: 40, displayValue: false });
+                        JsBarcode("#barcode", `*${boleta}*`, { format: "CODE128", lineColor: "#000", width: 2, height: 40, displayValue: false });
                     } catch(e) {}
                 } else {
                     document.getElementById('barcode').innerHTML = '';
