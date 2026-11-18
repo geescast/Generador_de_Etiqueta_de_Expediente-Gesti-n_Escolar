@@ -1,1 +1,1 @@
-# PLATAFORMA_VIRTUAL
+# Generador de Etiqueta de Expediente - Gestión Escolar
