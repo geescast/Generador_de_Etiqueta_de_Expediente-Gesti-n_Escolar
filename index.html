@@ -1,60 +1,4 @@
 <!-- ... existing code ... -->
-  <style>
-    /* Estilos de la hoja oficial para pantalla e impresión */
-    .official-sheet {
-      width: 100%;
-      max-width: 790px;
-      background: #ffffff;
-      color: #000000;
-      font-family: "Times New Roman", Times, Georgia, serif;
-      position: relative;
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-    }
-
-    /* Medida exacta de la Sección 1: 16 cm de largo x 2 cm de alto para pestaña de folder tamaño oficio */
-    .folder-tab-box {
-      width: 16cm;
-      height: 2cm;
-      max-width: 100%;
-      aspect-ratio: 16 / 2;
-      box-sizing: border-box;
-      border: 1.8px solid #000000;
-      padding: 3px;
-      background-color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
-    }
-
-    .folder-tab-inner {
-      width: 100%;
-      height: 100%;
-      background-color: #dce6f5 !important;
-      border: 1px solid #c5d5ea;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 8px;
-      overflow: hidden;
-      box-sizing: border-box;
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-    }
-
-    /* La Sección 2 mantiene el mismo ancho de referencia (16cm) para alineación simétrica */
-    .section-two-box {
-      width: 16cm;
-      max-width: 100%;
-      box-sizing: border-box;
-      border: 3.5px solid #000000;
-      padding: 7px;
-      background-color: #ffffff;
-      margin: 0 auto;
-    }
-
     .label-row-bg {
       background-color: #dce6f5 !important;
       border: 1px solid #c5d5ea;
@@ -62,78 +6,67 @@
       print-color-adjust: exact !important;
     }
 
-    .circle-badge {
-      width: 48px;
-      height: 48px;
-      border-radius: 9999px;
-      background-color: #4f81bd !important;
-      border: 3.5px solid #385d8a !important;
-      color: #ffffff !important;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: "Times New Roman", Georgia, serif;
-      font-size: 22px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.12);
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
+    /* Medida oficial exacta de la Sección 1 (Pestaña de folder tamaño oficio: 16 cm largo x 2 cm alto) */
+    .section-1-tab-box {
+      width: 16cm;
+      height: 2cm;
+      max-width: 100%;
+      box-sizing: border-box;
+      border: 1.8px solid #000000;
+      padding: 4px;
+      background-color: #ffffff;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    /* Protección contra impresión con Ctrl+P cuando el formulario está incompleto y calibración 1:1 */
-    @media print {
-      @page {
-        size: letter portrait;
-        margin: 8mm;
-      }
+    .section-2-data-box {
+      width: 16cm;
+      max-width: 100%;
+      box-sizing: border-box;
+      border: 3.5px solid #000000;
+      padding: 8px;
+      background-color: #ffffff;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
-      body {
-        background: #ffffff !important;
-        margin: 0 !important;
-        padding: 0 !important;
-      }
-
-      .no-print {
-        display: none !important;
-      }
-
-      /* Si el formulario NO es válido y el alumno presiona Ctrl+P, bloquea la hoja en blanco */
-      body.form-incomplete .print-sheet-wrapper {
-        display: none !important;
-      }
-
-      body.form-incomplete .print-blocked-warning {
-        display: flex !important;
-      }
-
-      body.form-complete .print-sheet-wrapper {
-        display: block !important;
-        width: 100% !important;
-        box-shadow: none !important;
-        border: none !important;
-        margin: 0 auto !important;
-        padding: 0 !important;
-      }
-
+    .circle-badge {
+      width: 54px;
+      height: 54px;
+<!-- ... existing code ... -->
       .official-sheet {
         max-width: 100% !important;
         box-shadow: none !important;
         border: none !important;
       }
 
-      /* Garantiza escala física exacta 16cm x 2cm en papel tamaño Carta */
-      .folder-tab-box {
+      /* Garantizar escala real 1:1 en impresión (16 cm x 2 cm exactos en papel) */
+      .section-1-tab-box {
         width: 16cm !important;
         height: 2cm !important;
         max-width: none !important;
       }
 
-      .section-two-box {
+      .section-2-data-box {
         width: 16cm !important;
         max-width: none !important;
       }
     }
   </style>
 </head>
+<body class="bg-slate-100 text-slate-800 font-sans min-h-screen flex flex-col form-incomplete">
+<!-- ... existing code ... -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-12 h-12 rounded-xl bg-white/15 border border-white/25 flex items-center justify-center font-extrabold text-lg tracking-tighter shrink-0">
+          IPN
+        </div>
+        <div>
+          <span class="text-xs uppercase tracking-widest text-rose-200 font-semibold block">ESCA Unidad Santo Tomás • Gestión Escolar</span>
+          <h1 class="text-lg sm:text-xl font-bold tracking-tight">Generador Oficial de Etiqueta para Expediente</h1>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
 <!-- ... existing code ... -->
       <button
         type="button"
@@ -149,26 +82,7 @@
 
     <!-- Grid Responsivo: Formulario (Izquierda) + Vista Previa Oficial (Derecha) -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-
-      <!-- COLUMNA IZQUIERDA: FORMULARIO OBLIGATORIO -->
-      <section class="no-print lg:col-span-5 bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden">
-        <div class="bg-slate-900 text-white px-6 py-4 flex items-center justify-between">
-          <div>
-            <h2 class="text-base font-bold">1. Captura los Datos de tu Expediente</h2>
-            <p class="text-xs text-slate-300">Se convierten automáticamente a MAYÚSCULAS</p>
-          </div>
-          <button
-            type="button"
-            id="btnClearForm"
-            class="text-xs bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-2.5 py-1.5 rounded-lg border border-slate-700 transition font-medium"
-            title="Limpiar todos los campos"
-          >
-            Limpiar Formulario
-          </button>
-        </div>
-
-        <form id="labelForm" class="p-6 space-y-4" novalidate>
-          
+<!-- ... existing code ... -->
           <!-- Campo 1: Nombre Completo -->
           <div>
             <div class="flex justify-between items-center mb-1">
@@ -181,35 +95,35 @@
               type="text"
               id="inputNombre"
               autocomplete="off"
-              placeholder="Ej. LÓPEZ MENDOZA ALEJANDRO DANIEL"
+              placeholder="EJ. LOPEZ MENDOZA ALEJANDRO DANIEL"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold uppercase focus:outline-none focus:ring-2 focus:ring-guinda focus:border-guinda transition"
             />
             <div class="flex items-center justify-between mt-1">
-              <p id="errNombre" class="text-xs text-slate-500">Se ajustará a la pestaña oficio (16 cm × 2 cm).</p>
+              <p id="errNombre" class="text-xs text-slate-500">Escribe Apellido Paterno, Materno y Nombre(s).</p>
               <label class="inline-flex items-center gap-1.5 text-xs text-slate-600 cursor-pointer select-none">
-                <input type="checkbox" id="chkRemoveAccents" class="rounded text-guinda focus:ring-guinda" />
-                <span>Omitir acentos</span>
+                <input type="checkbox" id="chkRemoveAccents" checked class="rounded text-guinda focus:ring-guinda" />
+                <span>Omitir acentos en nombre</span>
               </label>
             </div>
           </div>
 
-          <!-- Campo 2: Boleta o Preboleta (10 dígitos) -->
+          <!-- Campo 2: Boleta o Preboleta -->
           <div>
             <div class="flex justify-between items-center mb-1">
               <label for="inputBoleta" class="block text-xs font-bold uppercase tracking-wider text-slate-700">
                 Boleta o Preboleta (10 dígitos) <span class="text-red-600">*</span>
               </label>
-              <span id="badgeBoleta" class="text-[11px] font-medium text-slate-400">0 / 10 dígitos</span>
+              <span id="badgeBoleta" class="text-[11px] font-medium text-slate-400">0 / 10 caracteres</span>
             </div>
             <input
               type="text"
               id="inputBoleta"
               maxlength="10"
               autocomplete="off"
-              placeholder="Ej. 2027407185"
+              placeholder="EJ. 2027407185"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-mono font-bold uppercase focus:outline-none focus:ring-2 focus:ring-guinda focus:border-guinda transition"
             />
-            <p id="errBoleta" class="text-xs text-slate-500 mt-1">Captura los 10 caracteres de tu boleta o preboleta para generar el código de barras.</p>
+            <p id="errBoleta" class="text-xs text-slate-500 mt-1">Se colocará entre asteriscos (*BOLETA*) y generará el código de barras.</p>
           </div>
 
           <!-- Campo 3: CURP -->
@@ -225,13 +139,13 @@
               id="inputCurp"
               maxlength="18"
               autocomplete="off"
-              placeholder="Ej. LOMA080514HDFMNR04"
+              placeholder="EJ. LOMA080514HDFMNR04"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-mono font-bold uppercase focus:outline-none focus:ring-2 focus:ring-guinda focus:border-guinda transition"
             />
             <p id="errCurp" class="text-xs text-slate-500 mt-1">Verifica que tu CURP contenga exactamente los 18 caracteres oficiales.</p>
           </div>
 
-          <!-- Campo 4: Programa Académico (ESCA Santo Tomás + opción abierta) -->
+          <!-- Campo 4: Programa Académico (Exclusivo ESCA Santo Tomás, sin "Licenciatura" ni duplicados) -->
           <div>
             <div class="flex justify-between items-center mb-1">
               <label for="selectPrograma" class="block text-xs font-bold uppercase tracking-wider text-slate-700">
@@ -245,22 +159,13 @@
             >
               <option value="">-- SELECCIONA TU PROGRAMA ACADÉMICO --</option>
               <option value="CONTADOR PÚBLICO">CONTADOR PÚBLICO</option>
-              <option value="LICENCIATURA EN RELACIONES COMERCIALES">LICENCIATURA EN RELACIONES COMERCIALES</option>
-              <option value="LICENCIATURA EN NEGOCIOS DIGITALES">LICENCIATURA EN NEGOCIOS DIGITALES</option>
-              <option value="LICENCIATURA EN ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL">LICENCIATURA EN ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL</option>
-              <option value="LICENCIATURA EN COMERCIO INTERNACIONAL">LICENCIATURA EN COMERCIO INTERNACIONAL</option>
               <option value="ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL">ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL</option>
-              <option value="LICENCIATURA EN NEGOCIOS INTERNACIONALES">LICENCIATURA EN NEGOCIOS INTERNACIONALES</option>
-              <option value="OTRO">-- ESCRIBIR OTRO PROGRAMA MANUALMENTE --</option>
+              <option value="RELACIONES COMERCIALES">RELACIONES COMERCIALES</option>
+              <option value="NEGOCIOS INTERNACIONALES">NEGOCIOS INTERNACIONALES</option>
+              <option value="COMERCIO INTERNACIONAL">COMERCIO INTERNACIONAL</option>
+              <option value="NEGOCIOS DIGITALES">NEGOCIOS DIGITALES</option>
+              <option value="MERCADOTECNIA DIGITAL">MERCADOTECNIA DIGITAL</option>
             </select>
-
-            <!-- Campo manual si elige OTRO -->
-            <input
-              type="text"
-              id="inputOtroPrograma"
-              placeholder="Escribe el nombre completo del Programa Académico"
-              class="hidden mt-2 w-full px-3.5 py-2 rounded-xl border border-slate-300 text-sm font-semibold uppercase focus:outline-none focus:ring-2 focus:ring-guinda"
-            />
           </div>
 
           <!-- Campo 5: Grupo -->
@@ -269,62 +174,60 @@
               <label for="inputGrupo" class="block text-xs font-bold uppercase tracking-wider text-slate-700">
                 Grupo Asignado <span class="text-red-600">*</span>
               </label>
-              <span id="badgeGrupo" class="text-[11px] font-medium text-slate-400">Ej. 1CM4, 1RM2</span>
+              <span id="badgeGrupo" class="text-[11px] font-medium text-slate-400">Ej. 1CM4</span>
             </div>
             <input
               type="text"
               id="inputGrupo"
               maxlength="10"
               autocomplete="off"
-              placeholder="Ej. 1CM4"
+              placeholder="EJ. 1CM4"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm font-bold uppercase focus:outline-none focus:ring-2 focus:ring-guinda focus:border-guinda transition"
             />
             <p id="errGrupo" class="text-xs text-slate-500 mt-1">Indica tu grupo asignado en tu comprobante de inscripción.</p>
           </div>
+
+          <!-- Barra de Progreso de Validación -->
 <!-- ... existing code ... -->
-            <!-- DIAGRAMA PRINCIPAL DE ETIQUETAS (RECUADRO 1 Y RECUADRO 2 + FLECHAS AZULES) -->
-            <div class="relative mt-3">
-              
-              <!-- Cota informativa sutil de la medida de la pestaña (no interfiere con el recorte) -->
-              <div class="no-print flex items-center justify-center mb-1.5">
-                <span class="inline-flex items-center gap-1.5 text-[11px] font-sans font-semibold text-slate-500 bg-slate-100 border border-slate-300 px-2.5 py-0.5 rounded-full">
-                  <svg class="w-3.5 h-3.5 text-guinda" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/>
-                  </svg>
-                  Medida oficial de pestaña de folder tamaño oficio (Sección 1): <strong>16 cm de largo × 2 cm de alto</strong> (Escala real 1:1 al imprimir)
-                </span>
-              </div>
+      <!-- COLUMNA DERECHA: VISTA PREVIA EXACTA DE LA HOJA OFICIAL -->
+      <section class="lg:col-span-7 flex flex-col items-center">
+        
+        <div class="no-print w-full flex flex-wrap items-center justify-between gap-2 mb-2 px-1">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-600">Vista Previa en Tiempo Real (Sección 1 calibrada a 16 cm × 2 cm)</span>
+          </div>
+          <span id="previewStateTag" class="text-xs font-semibold px-2.5 py-0.5 rounded bg-slate-200 text-slate-700">
+            Modo Vista Previa Protegida
+          </span>
+        </div>
 
-              <!-- Contenedor con SVG de flechas superpuestas para fidelidad exacta al documento original -->
-              <div class="grid grid-cols-12 items-center gap-1">
-                
-                <!-- Columna izquierda: Flecha 1 que sube desde la instrucción 1 hacia el Recuadro 1 -->
-                <div class="col-span-1 flex flex-col items-center justify-center relative self-stretch">
-                  <svg class="w-full h-full min-h-[260px]" viewBox="0 0 45 310" fill="none" preserveAspectRatio="none">
-                    <!-- Línea azul que viene desde el texto 1 abajo y apunta al recuadro 1 arriba -->
-                    <path d="M 28 300 L 8 300 L 8 36 L 40 36" stroke="#4a7ebb" stroke-width="2" fill="none" />
-                    <polygon points="44,36 33,30 33,42" fill="#4a7ebb" />
-                  </svg>
-                </div>
-
+        <!-- Contenedor de la Hoja Oficial -->
+        <div class="print-sheet-wrapper w-full bg-white rounded-2xl shadow-xl border border-slate-300 p-4 sm:p-8 overflow-x-auto relative">
+<!-- ... existing code ... -->
                 <!-- Columna central: Recuadro 1 (Pestaña 16cm x 2cm) y Recuadro 2 (Datos + Código de barras) -->
-                <div class="col-span-10 space-y-3 flex flex-col items-center">
+                <div class="col-span-9 space-y-3">
                   
-                  <!-- RECUADRO 1: NOMBRE COMPLETO PARA LA PESTAÑA DEL FOLDER (16 cm x 2 cm exactos) -->
-                  <div class="folder-tab-box" title="Medida exacta de impresión: 16 cm × 2 cm">
-                    <div class="folder-tab-inner">
+                  <!-- Nota informativa de dimensiones oficiales (solo visible en pantalla) -->
+                  <div class="no-print text-[11px] text-slate-500 font-sans flex items-center justify-between px-1">
+                    <span>Medida oficial pestaña folder oficio (Sección 1): <strong>16 cm largo × 2 cm alto</strong></span>
+                    <span>Escala 1:1 al imprimir</span>
+                  </div>
+
+                  <!-- RECUADRO 1: NOMBRE COMPLETO PARA LA PESTAÑA DEL FOLDER (16 cm x 2 cm) -->
+                  <div class="section-1-tab-box flex items-center justify-center">
+                    <div class="label-row-bg w-full h-full flex items-center justify-center px-2 overflow-hidden">
                       <span
                         id="renderNombre"
                         class="font-serifLabel text-black tracking-wide whitespace-nowrap text-center leading-none"
-                        style="font-size: 20px;"
+                        style="font-size: 21px;"
                       >
-                        LÓPEZ MENDOZA ALEJANDRO DANIEL
+                        LOPEZ MENDOZA ALEJANDRO DANIEL
                       </span>
                     </div>
                   </div>
 
                   <!-- RECUADRO 2: CUADRO CON BORDE NEGRO GRUESO Y 5 FILAS -->
-                  <div class="section-two-box space-y-2">
+                  <div class="section-2-data-box space-y-2">
                     
                     <!-- Fila 1: *BOLETA* -->
                     <div class="label-row-bg h-9 flex items-center justify-center px-2">
@@ -345,9 +248,9 @@
                       <span
                         id="renderPrograma"
                         class="font-serifLabel text-black tracking-normal whitespace-nowrap text-center"
-                        style="font-size: 15px;"
+                        style="font-size: 16px;"
                       >
-                        LICENCIATURA EN ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL
+                        ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL
                       </span>
                     </div>
 
@@ -367,34 +270,25 @@
                 </div>
 
                 <!-- Columna derecha: Círculos azules 1 y 2 + Flecha hacia el Recuadro 2 -->
-                <div class="col-span-1 flex flex-col items-center justify-between self-stretch py-1 relative">
-                  <!-- Círculo 1 -->
-                  <div class="circle-badge mt-1">1</div>
-
-                  <!-- Flecha que entra al Recuadro 2 y Círculo 2 -->
-                  <div class="flex flex-col items-center my-auto w-full">
-                    <svg class="w-full h-9" viewBox="0 0 60 40" fill="none">
-                      <path d="M 58 20 L 6 20" stroke="#4a7ebb" stroke-width="2" />
-                      <polygon points="2,20 12,14 12,26" fill="#4a7ebb" />
-                    </svg>
-                    <div class="circle-badge mt-1">2</div>
-                  </div>
-                </div>
-
-              </div>
 <!-- ... existing code ... -->
-      // Auto-escalado de fuente para que nombres largos o carreras largas siempre quepan dentro de los 16cm x 2cm
-      function fitTextInSingleLine(element, maxFontPx, minFontPx, maxCharsThreshold) {
-        const textLength = element.textContent.trim().length;
-        if (textLength <= maxCharsThreshold) {
-          element.style.fontSize = maxFontPx + 'px';
-        } else {
-          const ratio = maxCharsThreshold / textLength;
-          const calculated = Math.max(minFontPx, Math.floor(maxFontPx * ratio));
-          element.style.fontSize = calculated + 'px';
-        }
-      }
+  <!-- Lógica de Validación en Tiempo Real, Auto-Ajuste Tipográfico y Código de Barras -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Referencias del DOM
+      const inputNombre = document.getElementById('inputNombre');
+      const chkRemoveAccents = document.getElementById('chkRemoveAccents');
+      const inputBoleta = document.getElementById('inputBoleta');
+      const inputCurp = document.getElementById('inputCurp');
+      const selectPrograma = document.getElementById('selectPrograma');
+      const inputGrupo = document.getElementById('inputGrupo');
 
+      // Badges e indicadores de error
+      const badgeNombre = document.getElementById('badgeNombre');
+      const badgeBoleta = document.getElementById('badgeBoleta');
+      const badgeCurp = document.getElementById('badgeCurp');
+      const badgePrograma = document.getElementById('badgePrograma');
+      const badgeGrupo = document.getElementById('badgeGrupo');
+<!-- ... existing code ... -->
       // Renderizar código de barras nítido con JsBarcode
       function renderBarcode(codeValue) {
         const cleanCode = (codeValue || '2027407185').replace(/[^A-Z0-9]/g, '');
@@ -414,34 +308,7 @@
       }
 
       // Actualizar estilo visual de cada badge de validación
-      function setFieldStatus(inputEl, badgeEl, isValid, validText, invalidText) {
-        if (isValid) {
-          inputEl.classList.remove('border-slate-300', 'border-rose-400');
-          inputEl.classList.add('border-emerald-500', 'bg-emerald-50/20');
-          badgeEl.textContent = validText;
-          badgeEl.className = 'text-[11px] font-bold text-emerald-700';
-        } else {
-          inputEl.classList.remove('border-emerald-500', 'bg-emerald-50/20');
-          if (inputEl.value.trim().length > 0) {
-            inputEl.classList.add('border-rose-400');
-          } else {
-            inputEl.classList.remove('border-rose-400');
-            inputEl.classList.add('border-slate-300');
-          }
-          badgeEl.textContent = invalidText;
-          badgeEl.className = 'text-[11px] font-medium text-slate-400';
-        }
-      }
-
-      // Función principal de actualización y validación en tiempo real
-      function validateAndUpdate() {
-        // 1. Nombre completo (mínimo 6 caracteres y al menos un espacio para apellido + nombre)
-        const rawNombre = normalizeUpperText(inputNombre.value, chkRemoveAccents.checked);
-        if (inputNombre.value !== rawNombre) {
-          const pos = inputNombre.selectionStart;
-          inputNombre.value = rawNombre;
-          inputNombre.setSelectionRange(pos, pos);
-        }
+<!-- ... existing code ... -->
         const cleanNombre = rawNombre.trim();
         const isNombreValid = cleanNombre.length >= 6 && cleanNombre.includes(' ');
         setFieldStatus(inputNombre, badgeNombre, isNombreValid, '✓ Nombre válido', 'Mínimo apellido y nombre');
@@ -452,7 +319,7 @@
           inputBoleta.value = cleanBoleta;
         }
         const isBoletaValid = /^[A-Z0-9]{10}$/.test(cleanBoleta);
-        setFieldStatus(inputBoleta, badgeBoleta, isBoletaValid, '✓ 10 / 10 dígitos', `${cleanBoleta.length} / 10 dígitos`);
+        setFieldStatus(inputBoleta, badgeBoleta, isBoletaValid, '✓ 10 / 10 caracteres', `${cleanBoleta.length} / 10 caracteres`);
 
         // 3. CURP (Exactamente 18 caracteres alfanuméricos)
         const cleanCurp = inputCurp.value.toUpperCase().replace(/[^A-Z0-9]/g, '');
@@ -462,16 +329,8 @@
         const isCurpValid = /^[A-Z0-9]{18}$/.test(cleanCurp);
         setFieldStatus(inputCurp, badgeCurp, isCurpValid, '✓ 18 / 18 caracteres', `${cleanCurp.length} / 18`);
 
-        // 4. Programa Académico
-        let cleanPrograma = '';
-        if (selectPrograma.value === 'OTRO') {
-          inputOtroPrograma.classList.remove('hidden');
-          inputOtroPrograma.value = normalizeUpperText(inputOtroPrograma.value, false);
-          cleanPrograma = inputOtroPrograma.value.trim();
-        } else {
-          inputOtroPrograma.classList.add('hidden');
-          cleanPrograma = selectPrograma.value.trim();
-        }
+        // 4. Programa Académico (ESCA Santo Tomás)
+        const cleanPrograma = selectPrograma.value.trim();
         const isProgramaValid = cleanPrograma.length >= 5;
         setFieldStatus(selectPrograma, badgePrograma, isProgramaValid, '✓ Carrera seleccionada', 'Selecciona carrera');
 
@@ -484,26 +343,36 @@
         setFieldStatus(inputGrupo, badgeGrupo, isGrupoValid, '✓ Grupo válido', 'Ej. 1CM4');
 
         // Actualizar textos en la Hoja Oficial (Sección 1 de 16cm x 2cm y Sección 2)
-        renderNombre.textContent = cleanNombre || 'LÓPEZ MENDOZA ALEJANDRO DANIEL';
-        fitTextInSingleLine(renderNombre, 21, 11, 30);
+        renderNombre.textContent = cleanNombre || 'NOMBRE COMPLETO INICIANDO POR APELLIDOS';
+        fitTextInSingleLine(renderNombre, 21, 11, 28);
 
-        renderBoleta.textContent = cleanBoleta ? `*${cleanBoleta}*` : '*2027407185*';
-        renderCurp.textContent = cleanCurp || 'LOMA080514HDFMNR04';
+        renderBoleta.textContent = cleanBoleta ? `*${cleanBoleta}*` : '*BOLETA O PREBOLETA*';
+        renderCurp.textContent = cleanCurp || 'CURP (18 CARACTERES)';
 
-        renderPrograma.textContent = cleanPrograma || 'LICENCIATURA EN ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL';
-        fitTextInSingleLine(renderPrograma, 15, 10, 42);
+        renderPrograma.textContent = cleanPrograma || 'PROGRAMA ACADÉMICO';
+        fitTextInSingleLine(renderPrograma, 16, 10, 40);
 
-        renderGrupo.textContent = cleanGrupo || '1CM4';
+        renderGrupo.textContent = cleanGrupo || 'GRUPO';
 
         // Actualizar Código de Barras
         renderBarcode(cleanBoleta || '2027407185');
+
+        // Contabilizar campos válidos
+        const validCount = [
 <!-- ... existing code ... -->
-      // Botón: Cargar Ejemplo Oficial Ficticio (10 dígitos con el 7º dígito mayor a 5: '7')
+      // Escuchar eventos en todos los inputs
+      [inputNombre, inputBoleta, inputCurp, selectPrograma, inputGrupo].forEach(el => {
+        el.addEventListener('input', validateAndUpdate);
+        el.addEventListener('change', validateAndUpdate);
+      });
+      chkRemoveAccents.addEventListener('change', validateAndUpdate);
+
+      // Botón: Cargar Ejemplo Oficial con datos ficticios solicitados
       btnLoadSample.addEventListener('click', () => {
-        inputNombre.value = 'LÓPEZ MENDOZA ALEJANDRO DANIEL';
+        inputNombre.value = 'LOPEZ MENDOZA ALEJANDRO DANIEL';
         inputBoleta.value = '2027407185';
         inputCurp.value = 'LOMA080514HDFMNR04';
-        selectPrograma.value = 'LICENCIATURA EN ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL';
+        selectPrograma.value = 'ADMINISTRACIÓN Y DESARROLLO EMPRESARIAL';
         inputGrupo.value = '1CM4';
         validateAndUpdate();
       });
@@ -514,55 +383,10 @@
         inputBoleta.value = '';
         inputCurp.value = '';
         selectPrograma.value = '';
-        inputOtroPrograma.value = '';
         inputGrupo.value = '';
         validateAndUpdate();
         inputNombre.focus();
       });
 
-      // Botón: Imprimir Etiqueta / Guardar PDF nativo (calibrado a escala 1:1 en hoja Carta)
-      btnPrint.addEventListener('click', () => {
-        if (btnPrint.disabled) return;
-        window.print();
-      });
-
-      // Botón: Descargar PDF Directo con html2pdf.js
-      btnDownloadPdf.addEventListener('click', async () => {
-        if (btnDownloadPdf.disabled) return;
-
-        const element = document.getElementById('officialPrintableArea');
-        const boletaFile = inputBoleta.value.trim() || 'EXPEDIENTE';
-        const originalText = downloadPdfText.textContent;
-
-        try {
-          btnDownloadPdf.disabled = true;
-          downloadPdfText.textContent = 'Generando archivo PDF...';
-
-          const opt = {
-            margin: [8, 8, 8, 8],
-            filename: `Etiqueta_Expediente_${boletaFile}.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: {
-              scale: 2.5,
-              useCORS: true,
-              backgroundColor: '#ffffff'
-            },
-            jsPDF: { unit: 'mm', format: 'letter', orientation: 'portrait' }
-          };
-
-          await html2pdf().set(opt).from(element).save();
-        } catch (err) {
-          console.error('Error al exportar PDF:', err);
-          window.print();
-        } finally {
-          btnDownloadPdf.disabled = false;
-          downloadPdfText.textContent = originalText;
-        }
-      });
-
-      // Inicializar la vista previa al abrir la página
-      validateAndUpdate();
-    });
-  </script>
-</body>
-</html>
+      // Botón: Imprimir Etiqueta / Guardar PDF nativo
+<!-- ... existing code ... -->
